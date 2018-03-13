@@ -1,37 +1,135 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html lang="en">
 
-You can use the [editor on GitHub](https://github.com/Abdulaziz14/CPIT-405-Assignment-1/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            font-size: 20px;
+        }
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+        @media only screen and (max-width: 320px) {
+            body {
+                font-size: 14px;
+            }
+        }
 
-### Markdown
+        #content {
+            margin: 0 20%;
+        }
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+        input[type=text] {
+            width: 30%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+        }
 
-```markdown
-Syntax highlighted code block
+        #add-btn {
+            background-color: #0564BD;
+            color: #FFF;
+            padding: 14px 10px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
 
-# Header 1
-## Header 2
-### Header 3
+        #add-btn:hover {
+            background-color: #044079;
+        }
 
-- Bulleted
-- List
+        #delete-all-btn {
+            background-color: #FFFFFF;
+            color: #000;
+            border: 1px solid;
+            cursor: pointer;
+            float: right;
+            text-align: center;
+        }
 
-1. Numbered
-2. List
+        ul {
+            margin-left: 0px;
+            padding-left: 0px;
+        }
 
-**Bold** and _Italic_ and `Code` text
+        ul li {
+            padding: 12px 8px 12px 40px;
+            list-style: none;
+            background-color: #eee;
+        }
 
-[Link](url) and ![Image](src)
-```
+        ul li:nth-child(odd) {
+            background-color: #ddd;
+        }
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+        ul li:hover {
+            background-color: #726E6E;
+            color: #FFF;
+        }
 
-### Jekyll Themes
+        span.close {
+            text-align: center;
+            padding: 1px 8px;
+            float: right;
+        }
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Abdulaziz14/CPIT-405-Assignment-1/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+        .close:hover {
+            background-color: #FFF;
+            color: #000;
+        }
 
-### Support or Contact
+        .completed {
+            text-decoration: line-through;
+        }
+    </style>
+</head>
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+<body>
+    <div id="content">
+        <h1>My ToDo List App</h1>
+        <input type="text" id="new-item" placeholder="A new item..." />
+        <button id="add-btn" onclick="addList()">Add</button>
+        <ul id="my-list">
+
+        </ul>
+        <button id="delete-all-btn" onclick=" deleteLists()">Delete all</button>
+    </div>
+
+    <script>
+        var newList = document.getElementById("new-item");
+        var add = document.getElementById("add-btn");
+        var list = document.getElementById("my-list");
+        var deleteAll = document.getElementById("delete-all-btn");
+
+        function addList() {
+            var txt = document.createTextNode(newList.value);
+            var myLiElem = document.createElement("li");
+            myLiElem.appendChild(txt);
+            list.appendChild(myLiElem);
+            addCloseBtn(myLiElem);
+        }
+
+        function addCloseBtn(liElement) {
+            var span = document.createElement("span");
+            var txt = document.createTextNode("\u00D7");
+            span.appendChild(txt);
+            span.className = "close";
+            span.onclick = function () {
+                var liItem = this.parentElement;
+                liItem.parentElement.removeChild(liItem);
+            }
+            liElement.appendChild(span);
+        }
+
+        function deleteLists() {
+            document.getElementById("my-list").innerHTML = "";
+        }
+    </script>
+
+</body>
+
+</html>
